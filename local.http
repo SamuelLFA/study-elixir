@@ -1,0 +1,27 @@
+@host = http://localhost:4000
+
+### List users
+GET {{host}}/api/users
+
+### Show user 
+GET {{host}}/api/users/d8a6cc69-7d36-4976-9900-c1bf88677c53
+
+### Create user
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+    "name": "Samuel",  
+    "email": "samuellfa5@gmail.com",
+    "address": "Rua X",
+    "role": "admin"
+}
+
+### Create User: Bad request
+POST {{host}}/api/users 
+Content-Type: application/json
+
+{
+    "name": "Samuel",  
+    "role": "admin"
+}
