@@ -4,7 +4,7 @@
 GET {{host}}/api/users
 
 ### Show user 
-GET {{host}}/api/users/d8a6cc69-7d36-4976-9900-c1bf88677c53
+GET {{host}}/api/users/a
 
 ### Create user
 POST {{host}}/api/users
