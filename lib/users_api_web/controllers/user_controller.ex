@@ -1,6 +1,7 @@
 defmodule UsersApiWeb.UserController do
   use UsersApiWeb, :controller
 
+  alias Ecto.UUID
   alias UsersApi.Admin
   alias UsersApi.Admin.User
 
@@ -26,12 +27,17 @@ defmodule UsersApiWeb.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    try do
-      user = Admin.get_user!(id)
-      render(conn, :show, user: user)
+    with {:ok, _} <- UUID.dump(id) do
+      try do
+        user = Admin.get_user!(id)
+        render(conn, :show, user: user)
 
-    rescue
-      Ecto.NoResultsError -> render(conn, :not_found, id: id)
+      rescue
+        Ecto.NoResultsError -> render(conn, :not_found, id: id)
+      end
+
+      else
+        :error -> render(conn, :not_found, id: id)
     end
   end
 
